@@ -19,6 +19,9 @@
         }
       }
     ]
+  },  
+  "engines": {
+    "node": ">=20.19.0"
   },
   "private": true,
   "dependencies": {
