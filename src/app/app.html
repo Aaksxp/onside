@@ -6,7 +6,6 @@
   <div class="grid-container">
     <div *ngFor="let url of photoUrls$ | async" class="grid-item">
       <img [src]="url"
-           alt="Photo"
            loading="lazy"
            (click)="openImage(url)">
     </div>
