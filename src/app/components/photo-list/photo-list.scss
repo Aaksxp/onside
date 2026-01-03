@@ -1,0 +1,259 @@
+/* Body margins */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+  padding-top: 2rem;
+}
+
+.logo-wrapper img {
+  max-width: 100px;
+  height: auto;
+}
+
+/* Container with side margins */
+.album-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5rem; /* Side margins */
+  min-height: calc(100vh - 80px);
+}
+
+/* 3-column grid with spacing */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem; /* Space between tiles */
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .album-container {
+    padding: 0 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; /* Smaller gap on mobile */
+  }
+  
+  .album-container {
+    padding: 0 8px;
+  }
+  
+  .logo-wrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .logo-wrapper img {
+    max-width: 100px;
+  }
+}
+
+/* Grid items - perfect squares with rounded corners */
+.grid-item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px; /* Rounded corners */
+  background: #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Mobile - smaller border radius */
+@media (max-width: 480px) {
+  .grid-item {
+    border-radius: 8px; /* Slightly smaller radius on mobile */
+  }
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect on desktop */
+.grid-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.grid-item:hover img {
+  transform: scale(1.02);
+}
+
+/* No hover on touch devices */
+@media (hover: none) {
+  .grid-item:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .grid-item:hover img {
+    transform: none;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  grid-column: 1 / -1;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal.closing {
+  animation: fadeOut 0.3s ease;
+}
+
+/* Modal image */
+.modal-image {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  cursor: default;
+  animation: zoomIn 0.3s ease;
+  border-radius: 8px; /* Rounded corners in modal too */
+}
+
+.modal-image.closing {
+  animation: zoomOut 0.3s ease;
+}
+
+/* Landscape images bigger */
+@media (orientation: landscape) {
+  .modal-image {
+    max-width: 98%;
+    max-height: 92%;
+  }
+}
+
+/* Mobile modal */
+@media (max-width: 480px) {
+  .modal-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 36px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 1;
+  animation: fadeIn 0.3s ease;
+}
+
+.close-btn.closing {
+  animation: fadeOut 0.3s ease;
+}
+
+/* Mobile close button */
+@media (max-width: 480px) {
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+  }
+}
+
+.close-btn:focus {
+  outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
