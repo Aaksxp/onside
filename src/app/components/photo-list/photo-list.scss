@@ -29,6 +29,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem; /* Space between tiles */
+  margin-bottom: 5rem;
 }
 
 /* Tablet */
@@ -119,13 +120,6 @@ body {
   grid-column: 1 / -1;
 }
 
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-  margin-top: 40px;
-}
 
 /* Modal */
 .modal {
