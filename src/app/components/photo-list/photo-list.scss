@@ -147,7 +147,7 @@ body {
   object-fit: contain;
   cursor: default;
   animation: zoomIn 0.3s ease;
-  border-radius: 8px; /* Rounded corners in modal too */
+  border-radius: 12px; /* Rounded corners in modal too */
 }
 
 .modal-image.closing {

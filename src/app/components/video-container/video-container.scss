@@ -1,13 +1,17 @@
 .video-wrapper {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 ratio */
-  height: 0;
+  width: 100%;
+  max-width: 1200px;   /* limits large screen width */
+  margin: 0 auto;      /* center horizontally */
+
+  aspect-ratio: 16 / 9; /* modern & cleaner than padding trick */
+  overflow: hidden;
+  border-radius: 12px;   /* optional: smooth edges */
 }
 
 .video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  border: 0;
+  display: block;
 }
