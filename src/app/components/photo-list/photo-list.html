@@ -5,9 +5,7 @@
 
   <div class="grid-container">
     <div *ngFor="let url of photoUrls$ | async" class="grid-item">
-      <img [src]="url"
-           loading="lazy"
-           (click)="openImage(url)">
+      <img [src]="url" loading="lazy" (click)="openImage(url)">
     </div>
   </div>
 
@@ -16,21 +14,29 @@
   </div>
 </div>
 
+<div style="display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+  padding: 2rem;">
+<div class="row">
+  <div class="col-md-auto">
+    <h2>Check out my on 500px Profile</h2>
+  </div>
+  <div class="col-md-auto">
+    <a class="btn btn-light btn-lg" href="https://500px.com/p/aakass?view=photos" target="_blank">
+      View Profile
+    </a>
+  </div>
+</div>
+
 <!-- Image Modal with animation class -->
-<div class="modal" 
-     *ngIf="selectedImage" 
-     [class.closing]="isClosing"
-     (click)="closeImage()">
-  
-  <button class="close-btn" 
-          [class.closing]="isClosing"
-          (click)="closeImage()" 
-          aria-label="Close">
+<div class="modal" *ngIf="selectedImage" [class.closing]="isClosing" (click)="closeImage()">
+
+  <button class="close-btn" [class.closing]="isClosing" (click)="closeImage()" aria-label="Close">
     ✕
   </button>
 
-  <img [src]="selectedImage" 
-       class="modal-image"
-       [class.closing]="isClosing"
-       (click)="stopPropagation($event)">
+  <img [src]="selectedImage" class="modal-image" [class.closing]="isClosing" (click)="stopPropagation($event)">
+</div>
+
 </div>
