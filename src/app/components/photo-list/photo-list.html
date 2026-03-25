@@ -1,11 +1,26 @@
 <div class="album-container">
-  <div class="logo-wrapper">
-    <img src="samuthra.ico" style="border-radius: 10px;" alt="Studio Samuthra Logo">
+  <div class="logo-wrapper" style="margin-top: 5vh;">
+    <img src="samuthra.ico" style="border-radius: 0.6vw; width: 8vw;" alt="Studio Samuthra Logo">
+  </div>
+    <div class="layout-bar">
+    <button 
+      [class.active]="layoutMode === 'masonry'" 
+      (click)="setLayout('masonry')" 
+      title="Masonry layout">
+      <i class="fa-solid fa-table-cells-large"></i>
+    </button>
+    <button 
+      [class.active]="layoutMode === 'grid'" 
+      (click)="setLayout('grid')" 
+      title="Grid layout">
+      <i class="fa-solid fa-grip"></i>
+    </button>
   </div>
 
-  <div class="grid-container">
+  <div class="grid-container" [class.grid-mode]="layoutMode === 'grid'">
     <div *ngFor="let url of photoUrls$ | async" class="grid-item">
-      <img [src]="url" loading="lazy" (click)="openImage(url)">
+      <img [src]="url" loading="lazy" class="lazy-img"
+        (load)="onImageLoad($event)" (click)="openImage(url)">
     </div>
   </div>
 
@@ -16,8 +31,8 @@
 
 <div style="display: flex;
   justify-content: center;
-  margin-bottom: 5rem;
-  padding: 2rem;">
+  margin-bottom: 8vh;
+  padding: 5vh;">
 <div class="row">
   <div class="col-md-auto">
     <h2>Check out my on 500px Profile</h2>
@@ -36,7 +51,8 @@
     ✕
   </button>
 
-  <img [src]="selectedImage" class="modal-image" [class.closing]="isClosing" (click)="stopPropagation($event)">
-</div>
+<div class="modal-image-wrapper" (click)="stopPropagation($event)">
+  <img [src]="selectedImage" class="modal-image" [class.closing]="isClosing">
+</div></div>
 
 </div>

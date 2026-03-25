@@ -25,7 +25,17 @@ export class PhotoList implements OnInit {
     this.selectedImage = url;
     this.isClosing = false;
   }
+layoutMode: 'masonry' | 'grid' = 'masonry';
 
+setLayout(mode: 'masonry' | 'grid') {
+  this.layoutMode = mode;
+}
+
+
+onImageLoad(event: Event) {
+  const img = event.target as HTMLImageElement;
+  img.classList.add('loaded');
+}
   closeImage() {
     this.isClosing = true;
     // Wait for animation to complete before removing modal
