@@ -1,58 +1,73 @@
 <div class="album-container">
+
   <div class="logo-wrapper" style="margin-top: 5vh;">
     <img src="samuthra.ico" style="border-radius: 0.6vw; width: 8vw;" alt="Studio Samuthra Logo">
   </div>
-    <div class="layout-bar">
-    <button 
-      [class.active]="layoutMode === 'masonry'" 
-      (click)="setLayout('masonry')" 
-      title="Masonry layout">
-      <i class="fa-solid fa-table-cells-large"></i>
-    </button>
-    <button 
-      [class.active]="layoutMode === 'grid'" 
-      (click)="setLayout('grid')" 
-      title="Grid layout">
-      <i class="fa-solid fa-grip"></i>
-    </button>
-  </div>
 
-  <div class="grid-container" [class.grid-mode]="layoutMode === 'grid'">
-    <div *ngFor="let url of photoUrls$ | async" class="grid-item">
-      <img [src]="url" loading="lazy" class="lazy-img"
-        (load)="onImageLoad($event)" (click)="openImage(url)">
+  <ng-container *ngIf="photoUrls$ | async as photoUrls">
+
+    <!-- Layout Toggle -->
+    <div *ngIf="photoUrls.length > 0" class="layout-bar">
+      <button [class.active]="layoutMode === 'grid'" (click)="setLayout('grid')">
+        <svg lucideLayoutGrid></svg>
+      </button>
+
+      <button [class.active]="layoutMode === 'masonry'" (click)="setLayout('masonry')">
+        <svg lucideLayoutDashboard></svg>
+      </button>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid-container" [class.grid-mode]="layoutMode === 'grid'">
+      <div *ngFor="let url of photoUrls; let i = index; trackBy: trackByUrl" class="grid-item">
+        <img [src]="url" loading="lazy" class="lazy-img" (load)="onImageLoad($event)" (click)="openImage(url, i)">
+      </div>
+    </div>
+
+    <!-- Empty -->
+    <div *ngIf="photoUrls.length === 0" class="empty-state">
+      No photos uploaded yet.
+    </div>
+
+  </ng-container>
+</div>
+
+<!-- Profile -->
+<div class="profile-section" style="margin-bottom: 7vh;
+  padding: 5vh;">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-auto">
+      <h2>Check out my 500px Profile</h2>
+    </div>
+    <div class="col-md-auto">
+      <a class="btn btn-light btn-lg" href="https://500px.com/p/aakass?view=photos" target="_blank">
+        View Profile
+      </a>
     </div>
   </div>
-
-  <div *ngIf="(photoUrls$ | async)?.length === 0" class="empty-state">
-    No photos uploaded yet.
-  </div>
 </div>
 
-<div style="display: flex;
-  justify-content: center;
-  margin-bottom: 8vh;
-  padding: 5vh;">
-<div class="row">
-  <div class="col-md-auto">
-    <h2>Check out my on 500px Profile</h2>
-  </div>
-  <div class="col-md-auto">
-    <a class="btn btn-light btn-lg" href="https://500px.com/p/aakass?view=photos" target="_blank">
-      View Profile
-    </a>
-  </div>
-</div>
-
-<!-- Image Modal with animation class -->
+<!-- Modal -->
 <div class="modal" *ngIf="selectedImage" [class.closing]="isClosing" (click)="closeImage()">
 
-  <button class="close-btn" [class.closing]="isClosing" (click)="closeImage()" aria-label="Close">
+  <!-- Close -->
+  <button class="close-btn" (click)="closeImage()">
     ✕
   </button>
 
-<div class="modal-image-wrapper" (click)="stopPropagation($event)">
-  <img [src]="selectedImage" class="modal-image" [class.closing]="isClosing">
-</div></div>
+  <!-- Prev -->
+  <button class="nav-btn left" (click)="prevImage($event)">
+    ‹
+  </button>
+
+  <!-- Next -->
+  <button class="nav-btn right" (click)="nextImage($event)">
+    ›
+  </button>
+
+  <!-- Image -->
+  <div class="modal-image-wrapper" (click)="stopPropagation($event)">
+    <img [src]="selectedImage" class="modal-image" [class.closing]="isClosing">
+  </div>
 
 </div>
