@@ -151,8 +151,9 @@ body {
 }
 
 .modal.closing {
-  animation: fadeOut 0.3s ease;
+  pointer-events: auto;
 }
+
 .modal-image-wrapper {
   width: 90vw;
   height: 90vh;
@@ -173,14 +174,6 @@ body {
 .modal-image.closing {
   animation: zoomOut 0.3s ease;
 }
-
-// /* Landscape images bigger */
-// @media (orientation: landscape) {
-//   .modal-image {
-//     max-width: 98%;
-//     max-height: 92%;
-//   }
-// }
 
 /* Mobile modal */
 @media (max-width: 480px) {
@@ -383,4 +376,39 @@ body {
     width: 16px;
     height: 16px;
   }
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0.4;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+
+.nav-btn.left {
+  left: 2vw;
+}
+
+.nav-btn.right {
+  right: 2vw;
+}
+
+.nav-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  opacity: 1;
 }

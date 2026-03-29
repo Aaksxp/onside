@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import { LucideLayoutDashboard,LucideLayoutGrid } from '@lucide/angular';
+import { LucideLayoutDashboard,LucideLayoutGrid, LucideChevronLeft, LucideChevronRight } from '@lucide/angular';
 import { Observable } from 'rxjs';
 import { SupabaseStorageService } from '../../services/supabase-storage.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -7,7 +7,8 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 @Component({
   selector: 'app-photo-list',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, LucideLayoutDashboard,LucideLayoutGrid],
+  imports: [AsyncPipe, CommonModule, LucideLayoutDashboard,LucideLayoutGrid, 
+    LucideChevronLeft, LucideChevronRight],
   templateUrl: './photo-list.html',
   styleUrl: './photo-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -34,25 +35,27 @@ export class PhotoList implements OnInit {
       this.photoList = urls || [];
     });
   }
-
-  // 🖼 Open image
   openImage(url: string, index: number) {
-    this.selectedImage = url;
-    this.selectedIndex = index;
-    this.isClosing = false;
-  }
+  if (this.selectedImage !== null) return;
 
-  // ❌ Close image
-  closeImage() {
-    this.isClosing = true;
+  this.selectedImage = url;
+  this.selectedIndex = index;
+}
 
-    setTimeout(() => {
-      this.selectedImage = null;
-      this.isClosing = false;
-    }, 200);
-  }
+onBackdropClick(event: MouseEvent) {
+  event.preventDefault();
+  event.stopPropagation();
 
-  // ⬅️ Previous
+  this.closeImage();
+}
+
+closeImage() {
+  if (!this.selectedImage) return;
+
+  this.selectedImage = null;
+  this.isClosing = false;
+}
+
   prevImage(event: Event) {
     event.stopPropagation();
 
@@ -64,7 +67,6 @@ export class PhotoList implements OnInit {
     this.selectedImage = this.photoList[this.selectedIndex];
   }
 
-  // ➡️ Next
   nextImage(event: Event) {
     event.stopPropagation();
 
@@ -76,36 +78,33 @@ export class PhotoList implements OnInit {
     this.selectedImage = this.photoList[this.selectedIndex];
   }
 
-  // ⌨️ Keyboard navigation
   @HostListener('window:keydown', ['$event'])
-  handleKeyDown(event: KeyboardEvent) {
+handleKeyDown(event: KeyboardEvent) {
+  if (!this.selectedImage || this.isClosing) return;
 
-    if (!this.selectedImage || this.isClosing) return;
-
-    if (event.key === 'Escape') {
-      this.closeImage();
-    }
-
-    if (event.key === 'ArrowRight') {
-      this.nextImage(event);
-    }
-
-    if (event.key === 'ArrowLeft') {
-      this.prevImage(event);
-    }
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    event.stopPropagation();   // 🚨 ADD THIS
+    this.closeImage();
   }
 
-  // 🎨 Layout switch
+  if (event.key === 'ArrowRight') {
+    this.nextImage(event);
+  }
+
+  if (event.key === 'ArrowLeft') {
+    this.prevImage(event);
+  }
+}
+
   setLayout(mode: 'masonry' | 'grid') {
     this.layoutMode = mode;
   }
 
-  // ⚡ Performance
   trackByUrl(index: number, url: string) {
     return url;
   }
 
-  // 🖼 Lazy load styling
   onImageLoad(event: Event) {
     const img = event.target as HTMLImageElement;
     img.classList.add('loaded');

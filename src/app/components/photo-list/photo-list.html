@@ -48,26 +48,31 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" *ngIf="selectedImage" [class.closing]="isClosing" (click)="closeImage()">
-
+<div class="modal" *ngIf="selectedImage" 
+     [class.closing]="isClosing" 
+     (click)="onBackdropClick($event)">
   <!-- Close -->
-  <button class="close-btn" (click)="closeImage()">
+  <button class="close-btn" (click)="closeImage(); $event.stopPropagation()">
     ✕
   </button>
 
   <!-- Prev -->
-  <button class="nav-btn left" (click)="prevImage($event)">
-    ‹
-  </button>
+ <button class="nav-btn left" (click)="prevImage($event); $event.stopPropagation()">
+        <svg lucideChevronLeft></svg>
+</button>
 
-  <!-- Next -->
-  <button class="nav-btn right" (click)="nextImage($event)">
-    ›
-  </button>
+<button class="nav-btn right" (click)="nextImage($event); $event.stopPropagation()">
+        <svg lucideChevronRight></svg>
+</button>
 
   <!-- Image -->
-  <div class="modal-image-wrapper" (click)="stopPropagation($event)">
-    <img [src]="selectedImage" class="modal-image" [class.closing]="isClosing">
-  </div>
+  <div class="modal-image-wrapper">
+  <img 
+    [src]="selectedImage" 
+    class="modal-image" 
+    [class.closing]="isClosing"
+    (click)="stopPropagation($event)">
+</div>
+
 
 </div>
