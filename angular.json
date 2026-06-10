@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "onside-gallery": {
+    "wave-gallery": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "onside:build:production"
+              "buildTarget": "wave:build:production"
             },
             "development": {
-              "buildTarget": "onside:build:development"
+              "buildTarget": "wave:build:development"
             }
           },
           "defaultConfiguration": "development"

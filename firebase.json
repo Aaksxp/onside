@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/onside/browser",
+    "public": "dist/wave/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

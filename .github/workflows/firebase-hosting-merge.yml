@@ -17,4 +17,4 @@
 #           repoToken: ${{ secrets.GITHUB_TOKEN }}
 #           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONSIDE_8A6F2 }}
 #           channelId: live
-#           projectId: onside-8a6f2
+#           projectId: wave-8a6f2
