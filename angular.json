@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "wave:build:production"
+              "buildTarget": "wave-gallery:build:production"
             },
             "development": {
-              "buildTarget": "wave:build:development"
+              "buildTarget": "wave-gallery:build:development"
             }
           },
           "defaultConfiguration": "development"

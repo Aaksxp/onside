@@ -1,48 +1,75 @@
-/* Body margins */
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .logo-wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom: 5rem;
-  padding-top: 2rem;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-top: var(--space-5);
 }
 
-.logo-wrapper img {
-  max-width: 100px;
+.logo-img {
+  width: 100px;
   height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logo-img:hover {
+  opacity: 0.85;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-bg-alt);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* Container with side margins */
 .album-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 5rem; /* Side margins */
+  padding: 0 var(--space-7); /* Side margins */
   min-height: calc(100vh - 80px);
 }
 
 /* 3-column grid with spacing */
 .grid-container {
   columns: 3;
-  column-gap: 3rem;
-  margin-bottom: 5rem;
+  column-gap: var(--space-6);
+  margin-bottom: var(--space-7);
 }
 
 /* Tablet */
 @media (max-width: 768px) {
   .grid-container {
     columns: 3;
-    column-gap: 12px;
+    column-gap: var(--space-3);
   }
   .grid-item {
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
   }
-  
+
   .album-container {
-    padding: 0 12px;
+    padding: 0 var(--space-3);
   }
 }
 
@@ -50,33 +77,39 @@ body {
 @media (max-width: 480px) {
   .grid-container {
     columns: 3;
-    column-gap: 8px;
+    column-gap: var(--space-2);
   }
   .grid-item {
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
     border-radius: 5px;
   }
-  
+
   .album-container {
-    padding: 0 8px;
+    padding: 0 var(--space-2);
   }
-  
+
   .logo-wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-3);
+    gap: var(--space-2);
   }
-  
-  .logo-wrapper img {
-    max-width: 100px;
+
+  .logo-img {
+    width: 70px;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    height: 34px;
   }
 }
 
 /* Grid items - perfect squares with rounded corners */
 .grid-item {
   break-inside: avoid;       /* Prevents image splitting across columns */
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-6);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--color-card-shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -98,7 +131,7 @@ body {
 /* Hover effect on desktop */
 .grid-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px var(--color-card-shadow-hover);
 }
 
 .grid-item:hover img {
@@ -109,9 +142,9 @@ body {
 @media (hover: none) {
   .grid-item:hover {
     transform: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--color-card-shadow);
   }
-  
+
   .grid-item:hover img {
     transform: none;
   }
@@ -119,8 +152,8 @@ body {
 
 .empty-state {
   text-align: center;
-  padding: 60px 20px;
-  color: #999;
+  padding: var(--space-6) var(--space-3);
+  color: var(--color-text-muted);
   grid-column: 1 / -1;
 }
 
@@ -135,6 +168,13 @@ body {
   transform: scale(1);
 }
 
+/* Profile section */
+.profile-section {
+  margin-bottom: var(--space-7);
+  padding: var(--space-6) var(--space-5);
+  text-align: center;
+}
+
 /* Modal */
 .modal {
   position: fixed;
@@ -142,7 +182,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95);
+  background: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -265,92 +305,44 @@ body {
   }
 }
 
-
-// new
-
-/* Logo wrapper needs relative positioning for the toggle */
-.logo-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 5rem;
-  padding-top: 2rem;
-}
-
+/* Layout toggle bar */
 .layout-bar {
   display: flex;
   justify-content: flex-end;  /* aligns to right */
-  gap: 6px;
-  margin-bottom: 2rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
 }
 
 .layout-bar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid var(--color-border);
   cursor: pointer;
-  padding: 8px 12px;
+  padding: var(--space-2) var(--space-3);
   border-radius: 8px;
-  color: #aaa;
+  color: var(--color-text-muted);
   font-size: 16px;
   transition: all 0.2s ease;
 }
 
 .layout-bar button:hover {
-  color: #555;
-  border-color: rgba(0,0,0,0.25);
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
 }
 
 .layout-bar button.active {
-  background: #111;
-  color: white;
-  border-color: #111;
-}
-
-/* Toggle sits on the right side */
-.layout-toggle {
-  position: absolute;
-  right: 0;
-  display: flex;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  padding: 5px;
-}
-
-.layout-toggle button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #aaa;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.layout-toggle button svg {
-  fill: currentColor;
-}
-
-.layout-toggle button:hover {
-  background: rgba(0, 0, 0, 0.08);
-  color: #555;
-}
-
-.layout-toggle button.active {
-  background: white;
-  color: #111;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  border-color: var(--color-accent);
 }
 
 /* Grid mode overrides */
 .grid-container.grid-mode {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  gap: var(--space-6);
   columns: unset; /* reset masonry */
 }
 
@@ -364,25 +356,11 @@ body {
   object-fit: cover;
 }
 
-/* Mobile — hide toggle or keep it small */
-@media (max-width: 480px) {
-  .layout-toggle {
-    padding: 3px;
-  }
-  .layout-toggle button {
-    padding: 4px 6px;
-  }
-  .layout-toggle button svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-border: none;
+  border: none;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -398,7 +376,6 @@ border: none;
 
   transition: all 0.2s ease;
 }
-
 
 .nav-btn.left {
   left: 2vw;

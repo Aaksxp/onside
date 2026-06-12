@@ -1,3 +1,11 @@
 <app-photo-list></app-photo-list>
 <app-video-container></app-video-container>
 <app-footer></app-footer>
+
+<button
+  class="scroll-top-btn"
+  [class.visible]="showScrollTop"
+  (click)="scrollToTop()"
+  aria-label="Scroll to top">
+  <svg lucideArrowUp></svg>
+</button>

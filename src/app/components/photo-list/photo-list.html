@@ -1,19 +1,24 @@
 <div class="album-container">
 
-  <div class="logo-wrapper" style="margin-top: 5vh;">
-    <img src="samuthra.ico" style="border-radius: 0.6vw; width: 8vw;" alt="Studio Samuthra Logo">
+  <div class="logo-wrapper">
+    <img [src]="logoSrc" class="logo-img" alt="Studio Samuthra Logo" (click)="toggleLogo()">
   </div>
 
   <ng-container *ngIf="photoUrls$ | async as photoUrls">
 
     <!-- Layout Toggle -->
     <div *ngIf="photoUrls.length > 0" class="layout-bar">
-      <button [class.active]="layoutMode === 'grid'" (click)="setLayout('grid')">
+      <button [class.active]="layoutMode === 'grid'" (click)="setLayout('grid')" aria-label="Grid layout">
         <svg lucideLayoutGrid></svg>
       </button>
 
-      <button [class.active]="layoutMode === 'masonry'" (click)="setLayout('masonry')">
+      <button [class.active]="layoutMode === 'masonry'" (click)="setLayout('masonry')" aria-label="Masonry layout">
         <svg lucideLayoutDashboard></svg>
+      </button>
+
+      <button (click)="toggleTheme()" aria-label="Toggle dark mode">
+        <svg *ngIf="!isDarkTheme" lucideMoon></svg>
+        <svg *ngIf="isDarkTheme" lucideSun></svg>
       </button>
     </div>
 
@@ -24,17 +29,11 @@
       </div>
     </div>
 
-    <!-- Empty -->
-    <div *ngIf="photoUrls.length === 0" class="empty-state">
-      No photos uploaded yet.
-    </div>
-
   </ng-container>
 </div>
 
 <!-- Profile -->
-<div class="profile-section" style="margin-bottom: 7vh;
-  padding: 5vh;">
+<div class="profile-section">
   <div class="row justify-content-center align-items-center">
     <div class="col-md-auto">
       <h2>Check out my 500px Profile</h2>
@@ -48,8 +47,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" *ngIf="selectedImage" 
-     [class.closing]="isClosing" 
+<div class="modal" *ngIf="selectedImage"
+     [class.closing]="isClosing"
      (click)="onBackdropClick($event)">
   <!-- Close -->
   <button class="close-btn" (click)="closeImage(); $event.stopPropagation()">
@@ -67,9 +66,9 @@
 
   <!-- Image -->
   <div class="modal-image-wrapper">
-  <img 
-    [src]="selectedImage" 
-    class="modal-image" 
+  <img
+    [src]="selectedImage"
+    class="modal-image"
     [class.closing]="isClosing"
     (click)="stopPropagation($event)">
 </div>
